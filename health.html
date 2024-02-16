@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Living Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg'); /* Specify the path to your background image */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sustainable Living Website</h1>
+    </header>
+    <div class="container">
+        <section class="section">
+            <h2>Calculate Carbon Footprint</h2>
+            <p>Electricity Usage (kWh): <input type="number" id="electricityUsage"></p>
+            <p>Natural Gas Usage (cubic meters): <input type="number" id="naturalGasUsage"></p>
+            <p>Car Miles: <input type="number" id="carMiles"></p>
+            <p>Bus Miles: <input type="number" id="busMiles"></p>
+            <p>Bike Miles: <input type="number" id="bikeMiles"></p>
+            <p>Meals Per Day: <input type="number" id="mealsPerDay"></p>
+            <button onclick="calculateCarbonFootprint()">Calculate</button>
+            <p id="carbonFootprintResult"></p>
+        </section>
+        <section class="section">
+            <h2>Sustainable Living Tips</h2>
+            <button onclick="getRandomTip()">Get Random Tip</button>
+            <p id="tipResult"></p>
+        </section>
+    </div>
+
+    <script>
+        // JavaScript logic
+        function calculateCarbonFootprint() {
+            var electricity = parseFloat(document.getElementById('electricityUsage').value);
+            var naturalGas = parseFloat(document.getElementById('naturalGasUsage').value);
+            var carMiles = parseFloat(document.getElementById('carMiles').value);
+            var busMiles = parseFloat(document.getElementById('busMiles').value);
+            var bikeMiles = parseFloat(document.getElementById('bikeMiles').value);
+            var mealsPerDay = parseFloat(document.getElementById('mealsPerDay').value);
+
+            var carbonFootprint = (
+                (electricity * 0.5) +
+                (naturalGas * 1.2) +
+                (carMiles * 2.0) +
+                (busMiles * 0.5) +
+                (bikeMiles * 0) +
+                (mealsPerDay * 3.0)
+            );
+
+            document.getElementById('carbonFootprintResult').innerHTML = "Carbon Footprint: " + carbonFootprint.toFixed(2) + " kg CO2";
+        }
+
+        var tips = {
+            'energy_conservation': [
+                "Turn off lights when not in use.",
+                "Use energy-efficient appliances.",
+                "Unplug electronics when not in use.",
+                "Use natural light during the day.",
+                "Switch to LED light bulbs.",
+                "Seal gaps and cracks in windows and doors."
+            ],
+            'waste_reduction': [
+                "Reduce, reuse, recycle.",
+                "Use reusable shopping bags and water bottles.",
+                "Compost organic waste.",
+                "Buy products with minimal packaging.",
+                "Avoid single-use plastics.",
+                "Donate or sell items instead of throwing them away."
+            ],
+            'transportation': [
+                "Walk or bike for short distances.",
+                "Use public transportation or carpool.",
+                "Keep your vehicle well-maintained.",
+                "Plan errands efficiently to reduce driving.",
+                "Consider hybrid or electric vehicles.",
+            ],
+            'diet': [
+                "Choose locally sourced and seasonal foods.",
+                "Eat less meat and dairy products.",
+                "Support sustainable farming practices.",
+                "Avoid food waste by planning meals and storing leftovers properly.",
+                "Grow your own fruits and vegetables.",
+
+            ]
+            // Add more categories and tips
+        };
+
+        function getRandomTip() {
+            var categories = Object.keys(tips);
+            var randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            var randomTip = tips[randomCategory][Math.floor(Math.random() * tips[randomCategory].length)];
+            document.getElementById('tipResult').innerHTML = randomTip;
+        }
+    </script>
+</body>
+</html>
